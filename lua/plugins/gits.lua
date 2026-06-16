@@ -21,5 +21,12 @@ return {
 				current_line_blame_formatter = "<author>, <author_time:%R> - <summary>",
 			})
 		end,
-	}, -- ← outer braces closed
+	},
+	{
+		"kdheepak/lazygit.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+		},
+	},
 }

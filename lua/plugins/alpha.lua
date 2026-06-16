@@ -197,7 +197,6 @@ return {
 				end,
 			})
 
-			vim.keymap.set("n", "<leader>fp", "<cmd>Telescope neovim-project discover<CR>", { desc = "Find Projects" })
 			vim.keymap.set("n", "<leader>a", "<cmd>Alpha<CR>", { desc = "Open dashboard" })
 		end,
 	},

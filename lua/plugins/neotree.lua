@@ -9,9 +9,12 @@ return {
 		},
 		lazy = false,
 		config = function()
-			vim.keymap.set("n", "<leader>e", function()
-				vim.cmd("Neotree filesystem reveal left")
-			end, { desc = "Toggle file tree" })
+			vim.keymap.set(
+				"n",
+				"<leader>e",
+				"<cmd>Neotree filesystem reveal left toggle<CR>",
+				{ desc = "Toggle file tree" }
+			)
 
 			vim.api.nvim_create_autocmd("DirChanged", {
 				callback = function()

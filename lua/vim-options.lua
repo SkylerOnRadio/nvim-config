@@ -14,5 +14,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 250
 vim.opt.termguicolors = true
 
+vim.opt.cmdheight = 0
+
 -- Keymaps
 vim.keymap.set("n", "<leader>bd", "<leader>bd", { desc = "Close Buffer" })

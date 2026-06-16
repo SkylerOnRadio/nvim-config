@@ -16,5 +16,14 @@ vim.opt.termguicolors = true
 
 vim.opt.cmdheight = 0
 
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = false,
+})
+
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#cba6f7", bold = true }) -- catppuccin mauve
+vim.opt.cursorline = true -- needed for CursorLineNr to activate
+vim.opt.cursorlineopt = "number" -- only highlight the number, not the whole line
+
 -- Keymaps
 vim.keymap.set("n", "<leader>bd", "<leader>bd", { desc = "Close Buffer" })

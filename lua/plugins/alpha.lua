@@ -56,6 +56,12 @@ return {
 			local right_elements = {
 				{ type = "button", shortcut = "n", text = "New file", cmd = "<cmd>ene <BAR> startinsert<CR>" },
 				{ type = "button", shortcut = "f", text = "Find file", cmd = "<cmd>Telescope find_files<CR>" },
+				{
+					type = "button",
+					shortcut = "p",
+					text = "File project",
+					cmd = "<cmd>lua vim.schedule(function() vim.cmd('Telescope projects') end)<CR>",
+				},
 				{ type = "button", shortcut = "r", text = "Recent files", cmd = "<cmd>Telescope oldfiles<CR>" },
 				{ type = "button", shortcut = "g", text = "Live grep", cmd = "<cmd>Telescope live_grep<CR>" },
 				{ type = "button", shortcut = "l", text = "Lazy", cmd = "<cmd>Lazy<CR>" },

@@ -6,7 +6,7 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "lua_ls", "clangd" },
+			ensure_installed = { "lua_ls", "clangd", "ts_ls", "bashls", "cmake-language-server", "marksman" },
 		},
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
@@ -25,19 +25,33 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
 					local opts = { buffer = args.buf }
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover docs" }))
-					vim.keymap.set(
-						"n",
-						"gd",
-						vim.lsp.buf.definition,
-						vim.tbl_extend("force", opts, { desc = "Go to definition" })
-					)
-					vim.keymap.set(
-						{ "n", "v" },
-						"<leader>ca",
-						vim.lsp.buf.code_action,
-						vim.tbl_extend("force", opts, { desc = "Code action" })
-					)
+					local map = function(modes, lhs, rhs, desc)
+						vim.keymap.set(modes, lhs, rhs, vim.tbl_extend("force", opts, { desc = desc }))
+					end
+
+					-- Navigation
+					map("n", "K", vim.lsp.buf.hover, "Hover docs")
+					map("n", "gd", vim.lsp.buf.definition, "Go to definition")
+					map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+					map("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
+					map("n", "gr", vim.lsp.buf.references, "References")
+					map("n", "gy", vim.lsp.buf.type_definition, "Go to type definition")
+
+					-- Actions
+					map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
+					map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+					map("n", "<leader>f", function()
+						vim.lsp.buf.format({ async = true })
+					end, "Format buffer")
+
+					-- Diagnostics  ← the error keymap you asked for
+					map("n", "<leader>ge", vim.diagnostic.open_float, "Show line diagnostics")
+					map("n", "[d", vim.diagnostic.goto_prev, "Prev diagnostic")
+					map("n", "]d", vim.diagnostic.goto_next, "Next diagnostic")
+					map("n", "<leader>q", vim.diagnostic.setloclist, "Diagnostics to loclist")
+
+					-- Signature help
+					map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature help")
 				end,
 			})
 		end,

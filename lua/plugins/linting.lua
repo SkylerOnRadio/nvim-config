@@ -95,8 +95,8 @@ return {
 
 			lint.linters_by_ft = {
 				-- C / C++  (clangd handles most of this, but cppcheck adds static analysis)
-				c = { "cppcheck" },
-				cpp = { "cppcheck" },
+				c = { "cpplint" },
+				cpp = { "cpplint" },
 
 				-- Lua
 				lua = { "luacheck" },

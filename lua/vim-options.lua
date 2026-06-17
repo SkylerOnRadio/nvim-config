@@ -26,4 +26,13 @@ vim.opt.cursorline = true -- needed for CursorLineNr to activate
 vim.opt.cursorlineopt = "number" -- only highlight the number, not the whole line
 
 -- Keymaps
-vim.keymap.set("n", "<leader>bd", "<leader>bd", { desc = "Close Buffer" })
+-- If using standard Neovim buffers:
+vim.keymap.set("n", "<leader>bd", "<Cmd>bdelete<CR>", { desc = "Close Buffer", silent = true })
+
+-- Move single lines silently
+vim.keymap.set("n", "<A-j>", "<Cmd>m .+1<CR>==", { desc = "Move line down", silent = true })
+vim.keymap.set("n", "<A-k>", "<Cmd>m .-2<CR>==", { desc = "Move line up", silent = true })
+
+-- Move selected blocks in Visual mode silently
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })

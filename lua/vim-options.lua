@@ -25,6 +25,14 @@ vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#cba6f7", bold = true }) -- catpp
 vim.opt.cursorline = true -- needed for CursorLineNr to activate
 vim.opt.cursorlineopt = "number" -- only highlight the number, not the whole line
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 200 })
+	end,
+})
+
 -- Keymaps
 -- If using standard Neovim buffers:
 vim.keymap.set("n", "<leader>bd", "<Cmd>bdelete<CR>", { desc = "Close Buffer", silent = true })

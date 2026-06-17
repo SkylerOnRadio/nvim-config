@@ -6,7 +6,7 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "lua_ls", "clangd", "ts_ls", "bashls", "cmake-language-server", "marksman" },
+			ensure_installed = { "lua_ls", "clangd", "ts_ls", "bashls", "marksman" },
 		},
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },

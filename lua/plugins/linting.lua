@@ -94,9 +94,6 @@ return {
 			local lint = require("lint")
 
 			lint.linters_by_ft = {
-				-- C / C++  (clangd handles most of this, but cppcheck adds static analysis)
-				c = { "cpplint" },
-				cpp = { "cpplint" },
 
 				-- Lua
 				lua = { "luacheck" },

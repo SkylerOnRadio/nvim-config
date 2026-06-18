@@ -17,7 +17,6 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
 
 			vim.lsp.config("*", {
 				capabilities = capabilities,
@@ -46,9 +45,6 @@ return {
 					-- Actions
 					map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code action")
 					map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
-					map("n", "<leader>f", function()
-						vim.lsp.buf.format({ async = true })
-					end, "Format buffer")
 
 					-- Diagnostics  ← the error keymap you asked for
 					map("n", "<leader>ge", vim.diagnostic.open_float, "Show line diagnostics")

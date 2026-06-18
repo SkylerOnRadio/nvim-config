@@ -18,6 +18,17 @@ vim.opt.wrap = true -- enable line wrapping
 vim.opt.linebreak = true -- wrap lines at spaces and not mid word
 vim.opt.breakindent = true -- maintain the indentation when wrapping lines
 
+-- alpha makes it so that the window it was opened in has text wrap disabled, this is to undo that on opening a file in the same window
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = vim.api.nvim_create_augroup("ForceWrap", { clear = true }),
+	pattern = "*",
+	callback = function()
+		if vim.bo.buftype == "" then
+			vim.opt_local.wrap = true
+		end
+	end,
+})
+
 vim.opt.signcolumn = "yes" -- use the space to the left of the line numbers to show icons related to the code
 vim.opt.updatetime = 250 -- number of milliseconds of user inactivity before the editor writes the swap file to disk
 vim.opt.termguicolors = true -- stop using 256-color terminal approximations and use the custom colors provided exactly
@@ -54,3 +65,17 @@ vim.keymap.set("n", "<A-k>", "<Cmd>m .-2<CR>==", { desc = "Move line up", silent
 -- Move selected blocks in Visual mode silently
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
+
+-- use visual move when near wrapped lines
+vim.keymap.set(
+	{ "n", "v" },
+	"j",
+	"v:count == 0 ? 'gj' : 'j'",
+	{ expr = true, silent = true, desc = "Move down visually" }
+)
+vim.keymap.set(
+	{ "n", "v" },
+	"k",
+	"v:count == 0 ? 'gk' : 'k'",
+	{ expr = true, silent = true, desc = "Move up visually" }
+)

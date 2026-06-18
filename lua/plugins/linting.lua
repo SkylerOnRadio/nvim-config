@@ -5,7 +5,7 @@ return {
 		cmd = { "ConformInfo" },
 		keys = {
 			{
-				"<leader>cf",
+				"<leader>bf",
 				function()
 					require("conform").format({ async = true, lsp_format = "fallback" })
 				end,
@@ -53,7 +53,7 @@ return {
 
 				format_on_save = {
 					lsp_format = "fallback",
-					timeout_ms = 500, -- bumped: black/isort need a little more time
+					timeout_ms = 1000, -- bumped: black/isort need a little more time
 				},
 
 				-- Formatter-specific overrides

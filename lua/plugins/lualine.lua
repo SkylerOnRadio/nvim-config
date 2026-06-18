@@ -35,10 +35,10 @@ return {
 				},
 				sections = {
 					lualine_a = {
-						{ "mode", icon = "" },
+						{ "mode" },
 					},
 					lualine_b = {
-						{ "branch", icon = "" },
+						{ "branch" },
 					},
 					lualine_c = {
 						{
@@ -56,13 +56,13 @@ return {
 						{
 							"diagnostics",
 							symbols = {
-								error = " ",
+								error = " ",
 								warn = " ",
 								info = " ",
 								diagnostics_color = {
 									error = { fg = "#f38ba8" },
 									warn = { fg = "#f9e2af" },
-									info = { fg = "#a6e3a1" },
+									info = { fg = "#a7c080" },
 								},
 							},
 						},
@@ -82,13 +82,13 @@ return {
 								}
 							end,
 							symbols = {
-								added = " ",
-								modified = " ",
-								removed = " ",
+								added = " ",
+								modified = " ",
+								removed = " ",
 							},
 							diff_color = {
-								added = { fg = "#a6e3a1" },
-								modified = { fg = "#f9e2af" },
+								added = { fg = "#a7c080" },
+								modified = { fg = "#8caaee" },
 								removed = { fg = "#f38ba8" },
 							},
 						},

@@ -113,9 +113,6 @@ return {
 
 				-- YAML (e.g. GitHub Actions, Docker Compose)
 				yaml = { "yamllint" },
-
-				-- Markdown
-				markdown = { "markdownlint" },
 			}
 
 			-- Linter config overrides
@@ -131,7 +128,17 @@ return {
 				},
 			})
 
-			-- Auto-lint on these events (not just on save)
+			-- Automatically remove "shellcheck" if it's not installed on the system
+			for ft, linter_list in pairs(lint.linters_by_ft) do
+				if type(linter_list) == "table" then
+					for i = #linter_list, 1, -1 do
+						if linter_list[i] == "shellcheck" and vim.fn.executable("shellcheck") == 0 then
+							table.remove(linter_list, i)
+						end
+					end
+				end
+			end
+
 			local lint_augroup = vim.api.nvim_create_augroup("nvim-lint", { clear = true })
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 				group = lint_augroup,

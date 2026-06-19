@@ -18,12 +18,11 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			vim.lsp.config("*", {
-				capabilities = capabilities,
-			})
-
-			local servers = { "lua_ls", "clangd" }
+			local servers = { "lua_ls", "clangd", "ts_ls", "bashls", "marksman" }
 			for _, server in ipairs(servers) do
+				vim.lsp.config(server, {
+					capabilities = capabilities,
+				})
 				vim.lsp.enable(server)
 			end
 

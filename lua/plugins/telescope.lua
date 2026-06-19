@@ -1,20 +1,64 @@
 return {
-	-- 1. Project Management Core
 	{
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("project_nvim").setup({
-				manual_mode = false,
-				detection_methods = { "pattern" },
-				patterns = { ".git", "Makefile", "package.json" },
-				silent_chdir = false,
-				scope_chdir = "global",
-				datapath = vim.fn.stdpath("data"),
-			})
-		end,
-	},
+		"coffebar/neovim-project",
+		opts = {
+			projects = {
+				"~/Projects/*",
+				"~/work/",
+				-- "~/.config/*",
+			},
+			picker = {
+				type = "telescope",
+			},
+			datapath = vim.fn.stdpath("data"),
+			last_session_on_startup = false,
+			dashboard_mode = false,
+			filetype_autocmd_timeout = 300,
+			forget_project_keys = {
+				i = "<C-d>",
+				n = "d",
+			},
+			per_branch_sessions = true,
+			session_manager_opts = {
+				autosave_ignore_dirs = {
+					vim.fn.expand("~"),
+					"/tmp",
+				},
+				autosave_ignore_filetypes = {
+					"ccc-ui",
+					"dap-repl",
+					"dap-view",
+					"dap-view-term",
+					"gitcommit",
+					"gitrebase",
+					"qf",
+					"toggleterm",
+				},
+				picker = {
+					type = "telescope",
 
-	-- 2. Telescope Configuration
+					preview = {
+						enabled = true,
+						git_status = true,
+						git_fetch = false,
+						show_hidden = true,
+					},
+				},
+			},
+		},
+		init = function()
+			local so = vim.opt.sessionoptions:get()
+			table.insert(so, "globals")
+			vim.opt.sessionoptions = so
+		end,
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+			{ "Shatur/neovim-session-manager" },
+		},
+		lazy = false,
+		priority = 100,
+	},
 	{
 		"nvim-telescope/telescope.nvim",
 		version = "*",
@@ -22,7 +66,6 @@ return {
 			"nvim-lua/plenary.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-ui-select.nvim",
-			"ahmedkhalf/project.nvim",
 		},
 		config = function()
 			local builtin = require("telescope.builtin")
@@ -47,58 +90,12 @@ return {
 						override_file_sorter = true,
 						case_mode = "smart_case",
 					},
-					projects = {
-						-- Intercepting the selection inside the project list
-						mappings = {
-							i = {
-								["<CR>"] = function(prompt_bufnr)
-									local project_actions = require("telescope._extensions.project.actions")
-									local has_persistence, persistence = pcall(require, "persistence")
-
-									if has_persistence then
-										-- 1. Save and pause current project's session tracking
-										persistence.stop()
-									end
-
-									-- 2. Wipe current active buffers so old project context doesn't spill over
-									vim.cmd("silent! %bd")
-
-									-- 3. Let project.nvim execute the directory change
-									project_actions.change_working_directory(prompt_bufnr, "global")
-
-									if has_persistence then
-										-- 4. Automatically locate and pull up the target project's session file
-										persistence.load()
-									end
-								end,
-							},
-							n = {
-								["<CR>"] = function(prompt_bufnr)
-									local project_actions = require("telescope._extensions.project.actions")
-									local has_persistence, persistence = pcall(require, "persistence")
-
-									if has_persistence then
-										persistence.stop()
-									end
-									vim.cmd("silent! %bd")
-									project_actions.change_working_directory(prompt_bufnr, "global")
-									if has_persistence then
-										persistence.load()
-									end
-								end,
-							},
-						},
-					},
 				},
 			})
 
 			-- Load extensions
 			require("telescope").load_extension("ui-select")
 			require("telescope").load_extension("fzf")
-			require("telescope").load_extension("projects")
-
-			-- Project keymap pointing directly to the picker
-			vim.keymap.set("n", "<leader>fp", "<cmd>Telescope projects<CR>", { desc = "Find Projects" })
 		end,
 	},
 }

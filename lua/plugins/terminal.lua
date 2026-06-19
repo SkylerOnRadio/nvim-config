@@ -8,7 +8,10 @@ return {
 		config = function()
 			require("toggleterm").setup({
 				open_mapping = [[<c-\>]],
-				float_opts = { border = "curved" },
+				auto_scroll = true,
+				float_opts = {
+					border = "curved",
+				},
 			})
 		end,
 	},

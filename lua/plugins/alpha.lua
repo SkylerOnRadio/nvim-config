@@ -78,8 +78,8 @@ return {
 						type = "button",
 						shortcut = "p",
 						icon = "󱔗",
-						text = "File project",
-						cmd = "<cmd>lua vim.schedule(function() vim.cmd('Telescope projects') end)<CR>",
+						text = "Find projects",
+						cmd = "<cmd>NeovimProjectDiscover history<CR>",
 					},
 					{
 						type = "button",

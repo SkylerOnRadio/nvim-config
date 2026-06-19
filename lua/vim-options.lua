@@ -79,3 +79,6 @@ vim.keymap.set(
 	"v:count == 0 ? 'gk' : 'k'",
 	{ expr = true, silent = true, desc = "Move up visually" }
 )
+
+-- I use CTRL+C to exit out of insert mode, so this to break that habit
+vim.keymap.set({ "i", "v", "c" }, "<C-c>", "<nop>")

@@ -7,6 +7,8 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 
+vim.opt.confirm = true -- prompt when existing modified buffer
+
 vim.diagnostic.config({ virtual_text = true }) -- show line diagnostic at the end of the line
 
 vim.opt.clipboard = "unnamedplus" -- use the system clipboard for yanking & deleting & pasting
@@ -63,18 +65,18 @@ vim.keymap.set("n", "<A-j>", "<Cmd>m .+1<CR>==", { desc = "Move line down", sile
 vim.keymap.set("n", "<A-k>", "<Cmd>m .-2<CR>==", { desc = "Move line up", silent = true })
 
 -- Move selected blocks in Visual mode silently
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
+vim.keymap.set("x", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
+vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
 
 -- use visual move when near wrapped lines
 vim.keymap.set(
-	{ "n", "v" },
+	{ "n", "x" },
 	"j",
 	"v:count == 0 ? 'gj' : 'j'",
 	{ expr = true, silent = true, desc = "Move down visually" }
 )
 vim.keymap.set(
-	{ "n", "v" },
+	{ "n", "x" },
 	"k",
 	"v:count == 0 ? 'gk' : 'k'",
 	{ expr = true, silent = true, desc = "Move up visually" }

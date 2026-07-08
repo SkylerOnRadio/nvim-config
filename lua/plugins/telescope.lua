@@ -6,6 +6,10 @@ return {
 				"~/Projects/*",
 				"~/work/",
 				-- "~/.config/*",
+				"~/.config/quickshell/",
+				"~/.config/hypr/",
+				"~/Documents/Notes/",
+				"~/Documents/Journal/",
 			},
 			picker = {
 				type = "telescope",

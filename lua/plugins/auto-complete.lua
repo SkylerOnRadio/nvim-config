@@ -29,6 +29,24 @@ return {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
 				},
+				formatting = {
+					fields = { "abbr", "kind", "menu" },
+					format = function(entry, vim_item)
+						-- Cap the abbreviation column so long names don't stretch the menu
+						local max_abbr_width = 30
+						if #vim_item.abbr > max_abbr_width then
+							vim_item.abbr = string.sub(vim_item.abbr, 1, max_abbr_width) .. "…"
+						end
+
+						-- Cap the menu column (where C++ template details live)
+						local max_menu_width = 40
+						if vim_item.menu and #vim_item.menu > max_menu_width then
+							vim_item.menu = string.sub(vim_item.menu, 1, max_menu_width) .. "…"
+						end
+
+						return vim_item
+					end,
+				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),

@@ -6,7 +6,15 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "lua_ls", "clangd", "ts_ls", "bashls", "marksman" },
+			ensure_installed = {
+				"lua_ls",
+				"clangd",
+				"ts_ls",
+				"bashls",
+				"marksman",
+				"emmet_language_server",
+				"markdown_oxide",
+			},
 		},
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
@@ -18,7 +26,8 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			local servers = { "lua_ls", "clangd", "ts_ls", "bashls", "marksman" }
+			local servers =
+				{ "lua_ls", "clangd", "ts_ls", "bashls", "marksman", "emmet_language_server", "markdown_oxide" }
 			for _, server in ipairs(servers) do
 				vim.lsp.config(server, {
 					capabilities = capabilities,

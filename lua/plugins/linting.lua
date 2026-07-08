@@ -28,12 +28,12 @@ return {
 					python = { "black", "isort" },
 
 					-- JS / TS / web
-					javascript = { "prettierd", stop_after_first = true },
-					typescript = { "prettierd", stop_after_first = true },
-					javascriptreact = { "prettierd", stop_after_first = true },
-					typescriptreact = { "prettierd", stop_after_first = true },
-					css = { "prettierd" },
-					html = { "prettierd" },
+					javascript = { "prettier", stop_after_first = true },
+					typescript = { "prettier", stop_after_first = true },
+					javascriptreact = { "prettier", stop_after_first = true },
+					typescriptreact = { "prettier", stop_after_first = true },
+					css = { "prettier" },
+					html = { "prettier" },
 
 					-- Data / config
 					json = { "prettierd" },

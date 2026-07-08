@@ -14,6 +14,5 @@ return {
 				TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 			},
 		},
-		keys = { { "<leader>ft", "<cmd>TodoTelescope<CR>", desc = "Find TODO's" } },
 	},
 }

@@ -84,3 +84,5 @@ vim.keymap.set(
 
 -- I use CTRL+C to exit out of insert mode, so this to break that habit
 vim.keymap.set({ "i", "v", "c" }, "<C-c>", "<nop>")
+
+vim.keymap.set({ "n" }, "yf", "<cmd>%y+<CR>", { desc = "Copy all the lines in the buffer" })

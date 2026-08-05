@@ -10,7 +10,7 @@ return {
 				debounce = 100,
 				-- 1. INDENT: Added this block to visually indent text under headings
 				indent = {
-					enabled = true,
+					enabled = false,
 					per_level = 2,
 					skip_level = 1,
 					skip_heading = false,

@@ -14,6 +14,7 @@ return {
 				"marksman",
 				"emmet_language_server",
 				"markdown_oxide",
+				"ruff",
 			},
 		},
 		dependencies = {
@@ -27,7 +28,7 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local servers =
-				{ "lua_ls", "clangd", "ts_ls", "bashls", "marksman", "emmet_language_server", "markdown_oxide" }
+				{ "lua_ls", "clangd", "ts_ls", "bashls", "marksman", "emmet_language_server", "markdown_oxide", "ruff" }
 			for _, server in ipairs(servers) do
 				vim.lsp.config(server, {
 					capabilities = capabilities,

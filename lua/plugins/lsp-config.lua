@@ -36,6 +36,15 @@ return {
 				vim.lsp.enable(server)
 			end
 
+			-- clangd needs to be told to query platformIO's cross-compiler for system includes / target flags
+			vim.lsp.config("clangd", {
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--query-driver=" .. vim.fn.expand("~/.platformio/packages/toolchain-*/bin/*"),
+				},
+			})
+
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(args)
 					local opts = { buffer = args.buf }

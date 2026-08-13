@@ -41,7 +41,7 @@ return {
 				cmd = {
 					"clangd",
 					"--background-index",
-					"--query-driver=" .. vim.fn.expand("~/.platformio/packages/toolchain-*/bin/*"),
+					"--query-driver=" .. vim.fn.expand("~") .. "/.platformio/packages/toolchain-*/bin/*",
 				},
 			})
 

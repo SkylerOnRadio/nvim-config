@@ -10,6 +10,7 @@ return {
 				"~/.config/hypr/",
 				"~/Documents/Notes/",
 				"~/Documents/Journal/",
+				"~/scripts",
 			},
 			picker = {
 				type = "telescope",

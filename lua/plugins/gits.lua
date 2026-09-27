@@ -19,7 +19,7 @@ return {
 					changedelete = { text = "~" },
 					untracked = { text = "┆" },
 				},
-				current_line_blame = true, -- ← turn this on to see blame
+				current_line_blame = true,
 				current_line_blame_opts = {
 					virt_text = true,
 					virt_text_pos = "eol",
@@ -27,6 +27,30 @@ return {
 					ignore_whitespace = false,
 				},
 				current_line_blame_formatter = "<author>, <author_time:%R> - <summary>",
+
+				on_attach = function(bufnr)
+					local gs = require("gitsigns")
+
+					vim.keymap.set("n", "]c", function()
+						if vim.wo.diff then
+							vim.cmd.normal({ "]c", bang = true })
+						else
+							gs.nav_hunk("next")
+						end
+					end, { desc = "Jump to next git [c]hange", buf = bufnr })
+
+					vim.keymap.set("n", "[c", function()
+						if vim.wo.deff then
+							vim.cmd.normal({ "[c", bang = true })
+						else
+							gs.nav_hunk("prev")
+						end
+					end, { desc = "Jump to previous git [c]hange", buf = bufnr })
+
+					vim.keymap.set("n", "<leader>hD", function()
+						gs.diffthis("~")
+					end, { desc = "git diff against last commit, buf = bufnr" })
+				end,
 			})
 		end,
 	},

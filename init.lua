@@ -15,6 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 -- 3. Initialize lazy.nvim
 -- Stripping out the 'root' and 'performance' blocks allows lazy to properly map paths
 require("vim-options")
+require("keybinds")
 require("lazy").setup("plugins")
 
 -- KEYMAPS

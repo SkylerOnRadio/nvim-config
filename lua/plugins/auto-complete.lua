@@ -1,29 +1,30 @@
 return {
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{
-		"L3MON4D3/LuaSnip",
-		version = "v2.*",
-		build = "make install_jsregexp",
-		dependencies = { "rafamadriz/friendly-snippets" },
-	},
 	{
 		"saghen/blink.cmp",
 		version = "*",
-		require("blink.cmp").setup({
-			keymap = {
-				preset = "default",
-			},
+		lazy = false,
+		build = "cargo build --release",
+		dependencies = {
+			-- Load friendly-snippets directly into blink.cmp
+			"rafamadriz/friendly-snippets",
+		},
+		opts = {
+			keymap = { preset = "default" },
 			appearance = {
+				use_nvim_cmp_as_default = false,
 				nerd_font_variant = "mono",
 			},
 			completion = {
 				documentation = { auto_show = true, auto_show_delay_ms = 500 },
 			},
 			sources = {
-				default = { "lsp", "path", "snippets" },
+				-- 'snippets' is re-added here
+				default = { "lsp", "path", "snippets", "buffer" },
 			},
-			fuzzy = { implementation = "lua" },
 			signature = { enabled = true },
-		}),
+
+			-- We do NOT define 'snippets = { preset = "luasnip" }' here.
+			-- By omitting it, blink.cmp automatically uses its native engine.
+		},
 	},
 }

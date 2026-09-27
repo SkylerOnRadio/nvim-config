@@ -102,12 +102,8 @@ return {
 			local lint = require("lint")
 
 			lint.linters_by_ft = {
-
 				-- Lua
 				lua = { "luacheck" },
-
-				-- Python
-				python = { "ruff" }, -- ruff replaces flake8/pylint and is much faster
 
 				-- JS / TS
 				javascript = { "eslint_d" },
@@ -118,9 +114,6 @@ return {
 				-- Shell
 				sh = { "shellcheck" },
 				bash = { "shellcheck" },
-
-				-- YAML (e.g. GitHub Actions, Docker Compose)
-				yaml = { "yamllint" },
 			}
 
 			-- Linter config overrides

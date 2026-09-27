@@ -7,61 +7,23 @@ return {
 		dependencies = { "rafamadriz/friendly-snippets" },
 	},
 	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp",
-			config = function() end,
-		},
-		config = function()
-			local cmp = require("cmp")
-			require("luasnip.loaders.from_vscode").lazy_load()
-			cmp.setup({
-				snippet = {
-					-- REQUIRED - you must specify a snippet engine
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-					end,
-				},
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				},
-				formatting = {
-					fields = { "abbr", "kind", "menu" },
-					format = function(entry, vim_item)
-						-- Cap the abbreviation column so long names don't stretch the menu
-						local max_abbr_width = 30
-						if #vim_item.abbr > max_abbr_width then
-							vim_item.abbr = string.sub(vim_item.abbr, 1, max_abbr_width) .. "…"
-						end
-
-						-- Cap the menu column (where C++ template details live)
-						local max_menu_width = 40
-						if vim_item.menu and #vim_item.menu > max_menu_width then
-							vim_item.menu = string.sub(vim_item.menu, 1, max_menu_width) .. "…"
-						end
-
-						return vim_item
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, -- For luasnip users.
-					{ name = "path" },
-				}, {
-					{ name = "buffer" },
-				}),
-			})
-		end,
+		"saghen/blink.cmp",
+		version = "*",
+		require("blink.cmp").setup({
+			keymap = {
+				preset = "default",
+			},
+			appearance = {
+				nerd_font_variant = "mono",
+			},
+			completion = {
+				documentation = { auto_show = true, auto_show_delay_ms = 500 },
+			},
+			sources = {
+				default = { "lsp", "path", "snippets" },
+			},
+			fuzzy = { implementation = "lua" },
+			signature = { enabled = true },
+		}),
 	},
 }

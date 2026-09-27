@@ -16,6 +16,28 @@ return {
 		opts = {},
 		config = function()
 			require("conform").setup({
+				format_on_save = function(bufnr)
+					local enabled_filetypes = {
+						lua = true,
+						cpp = true,
+						c = true,
+					}
+					--         {
+					-- 	lsp_format = "fallback",
+					-- 	timeout_ms = 1000, -- bumped: black/isort need a little more time
+					-- }
+
+					if enabled_filetypes[vim.bo[bufnr].filetype] then
+						return { timeout_ms = 1000 }
+					else
+						return nil
+					end
+				end,
+
+				default_format_opts = {
+					lsp_format = "fallback",
+				},
+
 				formatters_by_ft = {
 					-- C / C++
 					c = { "clang-format" },
@@ -23,9 +45,6 @@ return {
 
 					-- Lua
 					lua = { "stylua" },
-
-					-- Python  (black for style, then isort for imports)
-					python = { "black", "isort" },
 
 					-- JS / TS / web
 					javascript = { "prettier", stop_after_first = true },
@@ -43,17 +62,6 @@ return {
 					-- Shell
 					sh = { "shfmt" },
 					bash = { "shfmt" },
-
-					-- Markdown
-					markdown = { "prettierd" },
-
-					-- Fallback: try LSP formatting for anything not listed
-					["_"] = { "trim_whitespace", "trim_newlines" },
-				},
-
-				format_on_save = {
-					lsp_format = "fallback",
-					timeout_ms = 1000, -- bumped: black/isort need a little more time
 				},
 
 				-- Formatter-specific overrides

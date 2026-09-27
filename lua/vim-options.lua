@@ -18,7 +18,7 @@ vim.opt.signcolumn = "yes" -- use the space to the left of the line numbers to s
 vim.opt.updatetime = 250 -- number of milliseconds of user inactivity before the editor writes the swap file to disk
 vim.opt.timeoutlen = 300 -- decreae the time to register a mapped sequence
 
-vim.o.inccomand = "split" -- Preview substitutions live
+vim.o.inccommand = "split" -- Preview substitutions live
 
 vim.opt.cursorlineopt = "number" -- only highlight the number, not the whole line
 
@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
 	callback = function()
-		vim.highlight.on_yank({ higroup = "YankFlash", timeout = 200 })
+		vim.hl.on_yank({ higroup = "YankFlash", timeout = 200 })
 	end,
 })
 

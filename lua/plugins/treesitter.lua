@@ -6,6 +6,7 @@ return {
 		config = function()
 			require("nvim-treesitter").setup({ -- tree-sitter path to download parsers
 				install_dir = vim.fn.stdpath("data") .. "/site",
+				ensure_installed = { "cpp", "c", "lua", "vim", "vimdoc" },
 			})
 			vim.api.nvim_create_autocmd("FileType", { -- filetypes to perform highlighting on
 				pattern = { "cpp", "c", "lua" },
